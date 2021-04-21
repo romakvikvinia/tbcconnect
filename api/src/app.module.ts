@@ -8,8 +8,8 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(connectionConfig),
-    TemplateModule,
     AuthModule,
+    TemplateModule,
   ],
   controllers: [],
   providers: [],
