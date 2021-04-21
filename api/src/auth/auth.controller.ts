@@ -1,7 +1,18 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
+import { GetUser } from './auth.decorator';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
+import { User } from './user.entity';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -12,7 +23,19 @@ export class AuthController {
   }
 
   @Post('/signin')
-  async signIn(@Body(ValidationPipe) signIn: AuthDto) {
-    return '';
+  async signIn(
+    @Body(ValidationPipe) signInDto: AuthDto,
+  ): Promise<{ accessToken: string }> {
+    return this.authService.signIn(signInDto);
+  }
+
+  /**
+   * test privet url
+   */
+
+  @Post('/test')
+  @UseGuards(AuthGuard())
+  test(@GetUser() user: User) {
+    return user;
   }
 }
