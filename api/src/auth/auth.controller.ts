@@ -8,6 +8,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { GetUser } from './auth.decorator';
+import { ISignIn } from './auth.interface';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import { User } from './user.entity';
@@ -23,9 +24,7 @@ export class AuthController {
   }
 
   @Post('/signin')
-  async signIn(
-    @Body(ValidationPipe) signInDto: AuthDto,
-  ): Promise<{ accessToken: string }> {
+  async signIn(@Body(ValidationPipe) signInDto: AuthDto): Promise<ISignIn> {
     return this.authService.signIn(signInDto);
   }
 

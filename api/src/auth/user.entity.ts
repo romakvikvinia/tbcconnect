@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
   Unique,
   ObjectIdColumn,
+  OneToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+import { Template } from 'src/template/template.entity';
 
 @Entity('users')
 @Unique(['username'])
@@ -30,6 +32,21 @@ export class User extends BaseEntity {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
+  /**
+   *
+   * Relations
+   */
+
+  @OneToMany((type) => Template, (template) => template.author, {
+    cascade: true,
+  })
+  templates: Template[];
+
+  /**
+   *
+   * @param password
+   * @returns string
+   */
   async validatePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }

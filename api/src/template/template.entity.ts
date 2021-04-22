@@ -1,7 +1,18 @@
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { User } from 'src/auth/user.entity';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  ObjectIdColumn,
+  Unique,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('templates')
-export class Template {
+@Unique(['title'])
+export class Template extends BaseEntity {
   @ObjectIdColumn()
   _id: string;
 
@@ -10,4 +21,17 @@ export class Template {
 
   @Column()
   text: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date;
+
+  /**
+   * Relations
+   */
+
+  @ManyToOne((type) => User, (author) => author.templates)
+  author: User;
 }
