@@ -5,7 +5,7 @@ import {
 import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
-import { TemplateDto } from './dto/template.dto';
+import { TemplateDto, TemplateFilterDto } from './dto/template.dto';
 import { Template } from './template.entity';
 
 @EntityRepository(Template)
@@ -23,8 +23,23 @@ export class TemplateRepository extends Repository<Template> {
     } catch (error) {}
   }
 
-  async findTemplates() {
-    return this.find();
+  async findTemplates(templateFilterDto: TemplateFilterDto) {
+    try {
+      const { search, take = 50, skip = 0 } = templateFilterDto;
+      const where: any = { skip, take };
+      if (search) {
+        where.title = search;
+      }
+      if (take) {
+        where.take = take;
+      }
+      if (skip) {
+        where.skip = skip;
+      }
+      return await this.find(where);
+    } catch (error) {
+      throw new NotFoundException(`Templates not found `);
+    }
   }
 
   async updateTemplate(id: string, templateDto: TemplateDto, author: User) {

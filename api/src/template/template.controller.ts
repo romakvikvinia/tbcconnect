@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -13,7 +14,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/auth/auth.decorator';
 import { User } from 'src/auth/user.entity';
-import { TemplateDto } from './dto/template.dto';
+import { TemplateDto, TemplateFilterDto } from './dto/template.dto';
 import { TemplateService } from './template.service';
 
 @ApiTags('Templates')
@@ -22,8 +23,8 @@ export class TemplateController {
   constructor(private templateService: TemplateService) {}
 
   @Get()
-  index() {
-    return this.templateService.findAll();
+  index(@Query() templateFilterDto: TemplateFilterDto) {
+    return this.templateService.findAll(templateFilterDto);
   }
 
   @Post()
