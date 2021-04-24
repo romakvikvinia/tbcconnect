@@ -3,7 +3,7 @@ import { Box, Grid, TextField, Button } from '@material-ui/core';
 //@ts-ignore
 import EmailEditor from 'react-email-editor';
 
-const TemplateContainer = () => {
+const TemplateContainer: React.FC<{}> = () => {
   const emailEditorRef = useRef(null);
 
   const exportHtml = useCallback(() => {
