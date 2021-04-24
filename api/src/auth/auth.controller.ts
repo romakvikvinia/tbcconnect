@@ -6,7 +6,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GetUser } from './auth.decorator';
 import { ISignIn } from './auth.interface';
 import { AuthService } from './auth.service';
@@ -33,6 +33,7 @@ export class AuthController {
    */
 
   @Post('/test')
+  @ApiBearerAuth()
   @UseGuards(AuthGuard())
   test(@GetUser() user: User) {
     return user;

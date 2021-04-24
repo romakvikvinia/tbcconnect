@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
+  Patch,
   Post,
   UseGuards,
   ValidationPipe,
@@ -20,7 +23,7 @@ export class TemplateController {
 
   @Get()
   index() {
-    return 'hello';
+    return this.templateService.findAll();
   }
 
   @Post()
@@ -28,5 +31,23 @@ export class TemplateController {
   @UseGuards(AuthGuard())
   store(@GetUser() user: User, @Body(ValidationPipe) templateDto: TemplateDto) {
     return this.templateService.create(templateDto, user);
+  }
+
+  @Patch('/:id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard())
+  update(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body(ValidationPipe) templateDto: TemplateDto,
+  ) {
+    return this.templateService.update(id, templateDto, user);
+  }
+
+  @Delete('/:id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard())
+  destroy(@GetUser() user: User, @Param('id') id: string) {
+    return this.templateService.delete(id, user);
   }
 }

@@ -12,5 +12,11 @@ export class TemplateDto {
   @IsNotEmpty()
   @IsString()
   @Length(3, 191)
-  text: string;
+  description: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @Length(3, 191)
+  body: string;
 }

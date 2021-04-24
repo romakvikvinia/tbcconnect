@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  ObjectID,
   ObjectIdColumn,
   Unique,
   UpdateDateColumn,
@@ -20,7 +21,13 @@ export class Template extends BaseEntity {
   title: string;
 
   @Column()
-  text: string;
+  description: string;
+
+  @Column()
+  body: string;
+
+  @ObjectIdColumn({ name: 'authorId' })
+  authorId: string;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
@@ -32,6 +39,6 @@ export class Template extends BaseEntity {
    * Relations
    */
 
-  @ManyToOne((type) => User, (author) => author.templates)
-  author: User;
+  // @ManyToOne((type) => User, (author) => author.templates)
+  // author: User;
 }

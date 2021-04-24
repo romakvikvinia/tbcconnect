@@ -37,10 +37,10 @@ export class User extends BaseEntity {
    * Relations
    */
 
-  @OneToMany((type) => Template, (template) => template.author, {
-    cascade: true,
-  })
-  templates: Template[];
+  // @OneToMany((type) => Template, (template) => template.author, {
+  //   cascade: true,
+  // })
+  // templates: Template[];
 
   /**
    *
