@@ -14,14 +14,21 @@ const TemplateContainer: React.FC<{ match: match<{ id: string }> }> = ({
   const [{ isLoading, item }, setState] = useState<{
     isLoading: boolean;
     item: ITemplate | null;
-  }>({ isLoading: true, item: null });
+  }>({ isLoading: false, item: null });
 
   /**
    * methods
    */
 
   const loadItem = useCallback(async () => {
+    if (!id) return;
     try {
+      //@ts-ignore
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: true,
+      }));
+
       const item = await fetchTemplate(id);
       //@ts-ignore
       setState((prevState) => ({

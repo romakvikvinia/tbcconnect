@@ -52,14 +52,14 @@ export const TemplateForm: React.FC<{ item: ITemplate | null }> = ({ item }) => 
     });
   }, [emailEditorRef, formik]);
 
-  const onLoad = () => {
+  const onLoad = useCallback(() => {
     // you can load your template here;
     if (emailEditorRef.current) {
       const templateJson = (item && item.json) || {};
       //@ts-ignore
       emailEditorRef.current.editor.loadDesign(templateJson);
     }
-  };
+  }, [item]);
 
   useEffect(() => {
     if (item) {
@@ -72,7 +72,7 @@ export const TemplateForm: React.FC<{ item: ITemplate | null }> = ({ item }) => 
       });
       onLoad();
     }
-  }, [item]);
+  }, [item, onLoad]);
 
   return (
     <>
