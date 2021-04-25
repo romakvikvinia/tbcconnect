@@ -1,7 +1,10 @@
+import { store } from '../package/store';
+import { startFetchLogOut } from '../package/store/actions/user.action';
+
 const handleResponse = (response: any) => {
   if (response.status === 401) {
-    console.log('unauthorized');
     // unauthorized
+    store.dispatch(startFetchLogOut());
   }
 
   return new Promise((resolve, reject) => {
