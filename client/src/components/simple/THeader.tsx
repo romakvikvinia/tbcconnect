@@ -1,8 +1,12 @@
 import React, { useCallback } from 'react';
-import { AppBar, Button, CssBaseline, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, CssBaseline, Toolbar, Typography, Avatar } from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { history } from '../../helper/history';
+import { useDispatch, useSelector } from 'react-redux';
+import { reselectUser } from '../../package/store/reselect/user.reselect';
+import { startFetchLogOut } from '../../package/store/actions/user.action';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -29,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 export const THeader = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector(reselectUser);
 
   /**
    * methods
@@ -45,6 +51,10 @@ export const THeader = () => {
       pathname: '/',
     });
   }, []);
+
+  const handleLogout = useCallback(() => {
+    dispatch(startFetchLogOut());
+  }, [dispatch]);
 
   return (
     <>
@@ -65,14 +75,23 @@ export const THeader = () => {
             <Link to='/' className={classes.link}>
               Main
             </Link>
-
-            <Link to='/template/create' className={classes.link}>
-              Create
-            </Link>
+            {isAuthenticated ? (
+              <Link to='/template/create' className={classes.link}>
+                Create
+              </Link>
+            ) : null}
           </nav>
-          <Button onClick={handleRedirectToSignIn} color='primary' variant='outlined' className={classes.link}>
-            Login
-          </Button>
+          {isAuthenticated ? (
+            <Button onClick={handleLogout}>
+              <Avatar>
+                <AccountCircle />
+              </Avatar>
+            </Button>
+          ) : (
+            <Button onClick={handleRedirectToSignIn} color='primary' variant='outlined' className={classes.link}>
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </>

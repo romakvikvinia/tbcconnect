@@ -38,6 +38,7 @@ const handleResponse = (response: any) => {
 
 const handleError = (error: any, url: string) => {
   let err = error;
+  console.log(error);
   try {
     err = JSON.parse(err);
   } catch (e) {
@@ -69,10 +70,10 @@ export const jsonRequest = (url: string, isPrivate = true, body: any, method = '
   }
 
   return fetch(url, options).then(
-    (response) => {
+    (response: Response) => {
       return handleResponse(response);
     },
-    (error) => {
+    (error: Response) => {
       return handleError(error, url);
     }
   );

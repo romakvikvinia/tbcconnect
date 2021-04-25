@@ -4,17 +4,18 @@ import { Switch, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { Container } from '@material-ui/core';
 import { THeader } from './components/simple/THeader';
+import { TLoader } from './components/simple/TLoader';
 
 const MainContainer = loadable(() => import('./module/main/MainContainer'), {
-  fallback: 'Loading...',
+  fallback: <TLoader isLoading={true} />,
 });
 
 const TemplateContainer = loadable(() => import('./module/template/TemplateContainer'), {
-  fallback: 'Loading...',
+  fallback: <TLoader isLoading={true} />,
 });
 
-const SignInContainer = loadable(() => import('./module/auth/SingUpContainer'), {
-  fallback: 'Loading...',
+const SignInContainer = loadable(() => import('./module/auth/SingInContainer'), {
+  fallback: <TLoader isLoading={true} />,
 });
 
 function App() {

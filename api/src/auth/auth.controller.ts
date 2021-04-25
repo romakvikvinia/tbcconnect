@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  HttpCode,
   Post,
   UseGuards,
   ValidationPipe,
@@ -24,6 +25,7 @@ export class AuthController {
   }
 
   @Post('/signin')
+  @HttpCode(200)
   async signIn(@Body(ValidationPipe) signInDto: AuthDto): Promise<ISignIn> {
     return this.authService.signIn(signInDto);
   }
