@@ -5,6 +5,7 @@ import loadable from '@loadable/component';
 import { Container } from '@material-ui/core';
 import { THeader } from './components/simple/THeader';
 import { TLoader } from './components/simple/TLoader';
+import { PrivateRoute } from './components/simple/PrivateRoute';
 
 const MainContainer = loadable(() => import('./module/main/MainContainer'), {
   fallback: <TLoader isLoading={true} />,
@@ -25,7 +26,7 @@ function App() {
       <Container maxWidth='md' component='main'>
         <Switch>
           <Route exact path='/' component={MainContainer} />
-          <Route exact path='/template/create' component={TemplateContainer} />
+          <PrivateRoute exact path='/template/create' component={TemplateContainer} />
           <Route exact path='/signin' component={SignInContainer} />
         </Switch>
       </Container>

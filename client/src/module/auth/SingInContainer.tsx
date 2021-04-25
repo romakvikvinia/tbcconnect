@@ -8,8 +8,10 @@ import { startFetchUserCredentials } from '../../package/store/actions/user.acti
 import { TLoader } from '../../components/simple/TLoader';
 import { history } from '../../helper/history';
 import { reselectUser } from '../../package/store/reselect/user.reselect';
+import { useLocation } from 'react-router';
 
 const SingInContainer: React.FC<{}> = () => {
+  const { state } = useLocation<{ from: string }>();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector(reselectUser);
   const formik = useFormik({
@@ -31,8 +33,10 @@ const SingInContainer: React.FC<{}> = () => {
   });
 
   useEffect(() => {
-    if (isAuthenticated) history.push({ pathname: '/' });
-  }, [isAuthenticated]);
+    if (isAuthenticated) {
+      history.push({ pathname: `${state && state.from ? state.from : '/'}` });
+    }
+  }, [isAuthenticated, state]);
   return (
     <>
       <TLoader isLoading={formik.isSubmitting} />
