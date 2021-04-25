@@ -58,6 +58,7 @@ const SingInContainer: React.FC<{}> = () => {
             <TextField
               id='password'
               label='password'
+              type='password'
               fullWidth
               value={formik.values.password}
               onChange={formik.handleChange('password')}
