@@ -24,7 +24,7 @@ describe('jwt.strategy', () => {
   });
 
   describe('validate', () => {
-    it('vlidates and returns user object', async () => {
+    it('validates and returns user object', async () => {
       const user = new User();
       user.username = 'testuser';
 
@@ -39,7 +39,7 @@ describe('jwt.strategy', () => {
       });
       expect(result).toEqual(user);
     });
-    it('thorws an uthoraiz exception', () => {
+    it('throws an unauthorized exception', () => {
       userRepository.findOne.mockResolvedValue(null);
       expect(userRepository.findOne).not.toHaveBeenCalled();
       expect(
