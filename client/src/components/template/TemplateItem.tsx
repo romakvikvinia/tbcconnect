@@ -25,12 +25,16 @@ export const TemplateCard: React.FC<ITemplate> = ({ _id, title, description, bod
   }, [_id, pathname]);
 
   const handleRedirectToEdit = useCallback(() => {
-    if (pathname.includes('/template')) return;
+    if (pathname.includes('/edit')) return;
     history.push({
       pathname: `/template/${_id}/edit`,
     });
   }, [_id, pathname]);
 
+  /**
+   * here is no owner restriction
+   * TODO: need to add don't show delete and edit button to all
+   */
   const handleDeleteTemplate = useCallback(async () => {
     if (!window.confirm('Are you sure?')) return;
     dispatch(startFetchDeleteTemplate(_id));
