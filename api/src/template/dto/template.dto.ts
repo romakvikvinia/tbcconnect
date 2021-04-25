@@ -25,6 +25,12 @@ export class TemplateDto {
   @IsString()
   @MinLength(3)
   body: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  json: string;
 }
 
 export class TemplateFilterDto {

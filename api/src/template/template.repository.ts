@@ -12,11 +12,12 @@ import { Template } from './template.entity';
 export class TemplateRepository extends Repository<Template> {
   async createTemplate(templateDto: TemplateDto, author: User) {
     try {
-      const { title, description, body } = templateDto;
+      const { title, description, body, json } = templateDto;
       const template = this.create({
         title,
         description,
         body,
+        json,
         authorId: author._id,
       });
       await template.save();
@@ -44,7 +45,7 @@ export class TemplateRepository extends Repository<Template> {
 
   async updateTemplate(id: string, templateDto: TemplateDto, author: User) {
     try {
-      const { title, description, body } = templateDto;
+      const { title, description, body, json } = templateDto;
       const item = await this.findOne({
         where: { _id: new ObjectID(id), authorId: new ObjectID(author._id) },
       });
@@ -55,6 +56,7 @@ export class TemplateRepository extends Repository<Template> {
       item.title = title;
       item.description = description;
       item.body = body;
+      item.json = json;
       await item.save();
     } catch (error) {
       throw new InternalServerErrorException('Error');

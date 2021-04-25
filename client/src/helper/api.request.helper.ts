@@ -9,7 +9,7 @@ const handleResponse = (response: any) => {
 
   return new Promise((resolve, reject) => {
     if (response.ok) {
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         var contentType = response.headers.get('content-type');
         if (contentType && contentType.includes('application/json')) {
           response.json().then((json: any) => {

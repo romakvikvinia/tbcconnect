@@ -26,6 +26,9 @@ export class Template extends BaseEntity {
   @Column()
   body: string;
 
+  @Column()
+  json: string;
+
   @ObjectIdColumn({ name: 'authorId' })
   authorId: string;
 
