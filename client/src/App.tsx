@@ -52,6 +52,7 @@ function App() {
           <Route exact path='/' component={MainContainer} />
           <PrivateRoute exact path='/template/create' component={TemplateContainer} />
           <Route exact path='/template/:id' component={TemplateDetailContainer} />
+          <PrivateRoute exact path='/template/:id/edit' component={TemplateContainer} />
           <Route exact path='/signin' component={SignInContainer} />
           <Route component={NotFoundContainer} />
         </Switch>

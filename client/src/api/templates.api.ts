@@ -10,3 +10,6 @@ export const fetchCreateTemplate = ({ title, description, body, json }: ITemplat
 export const fetchTemplate = (id: string) => jsonRequest(`${baseUrl}/templates/${id}`, false, null);
 
 export const fetchDeleteTemplate = (id: string) => jsonRequest(`${baseUrl}/templates/${id}`, true, null, 'DELETE');
+
+export const fetchUpdateTemplate = (id: string, { title, description, body, json }: ITemplate) =>
+  jsonRequest(`${baseUrl}/templates/${id}`, true, { title, description, body, json }, 'PATCH');
