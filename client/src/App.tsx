@@ -20,6 +20,13 @@ const MainContainer = loadable(() => import('./module/main/MainContainer'), {
 const TemplateContainer = loadable(() => import('./module/template/TemplateContainer'), {
   fallback: <TLoader isLoading={true} />,
 });
+const TemplateDetailContainer = loadable(() => import('./module/template/TemplateDetailContainer'), {
+  fallback: <TLoader isLoading={true} />,
+});
+
+const NotFoundContainer = loadable(() => import('./components/simple/NotFound'), {
+  fallback: <TLoader isLoading={true} />,
+});
 
 const SignInContainer = loadable(() => import('./module/auth/SingInContainer'), {
   fallback: <TLoader isLoading={true} />,
@@ -44,7 +51,9 @@ function App() {
         <Switch>
           <Route exact path='/' component={MainContainer} />
           <PrivateRoute exact path='/template/create' component={TemplateContainer} />
+          <Route exact path='/template/:id' component={TemplateDetailContainer} />
           <Route exact path='/signin' component={SignInContainer} />
+          <Route component={NotFoundContainer} />
         </Switch>
       </Container>
     </>

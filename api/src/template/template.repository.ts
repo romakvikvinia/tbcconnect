@@ -43,6 +43,14 @@ export class TemplateRepository extends Repository<Template> {
     }
   }
 
+  async findTemplate(id: string) {
+    try {
+      return await this.findOne(id);
+    } catch (error) {
+      throw new NotFoundException(`Templates not found `);
+    }
+  }
+
   async updateTemplate(id: string, templateDto: TemplateDto, author: User) {
     try {
       const { title, description, body, json } = templateDto;

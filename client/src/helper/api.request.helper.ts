@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { store } from '../package/store';
 import { startFetchLogOut } from '../package/store/actions/user.action';
 
@@ -5,6 +6,7 @@ const handleResponse = (response: any) => {
   if (response.status === 401) {
     // unauthorized
     store.dispatch(startFetchLogOut());
+    toast.error('unauthorized');
   }
 
   return new Promise((resolve, reject) => {

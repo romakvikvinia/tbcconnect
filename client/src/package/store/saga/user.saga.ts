@@ -5,7 +5,7 @@ import {
   setUserCredentials,
   setUserCredentialsLoader,
 } from '../actions/user.action';
-import { START_FETCH_LOGOUT, START_FETCH_USER_CREDENTIALS } from '../const/user.const';
+import { START_FETCH_LOGOUT, START_FETCH_USER_CREDENTIALS } from '../const';
 
 // actions
 

@@ -27,6 +27,11 @@ export class TemplateController {
     return this.templateService.findAll(templateFilterDto);
   }
 
+  @Get('/:id')
+  show(@Param('id') id: string) {
+    return this.templateService.get(id);
+  }
+
   @Post()
   @ApiBearerAuth()
   @UseGuards(AuthGuard())

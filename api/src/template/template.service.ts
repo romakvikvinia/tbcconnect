@@ -18,6 +18,10 @@ export class TemplateService {
     return await this.templateRepository.findTemplates(templateFilterDto);
   }
 
+  async get(id: string) {
+    return await this.templateRepository.findTemplate(id);
+  }
+
   async update(id: string, templateDto: TemplateDto, user: User) {
     return this.templateRepository.updateTemplate(id, templateDto, user);
   }

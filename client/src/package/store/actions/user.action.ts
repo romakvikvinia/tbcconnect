@@ -5,7 +5,7 @@ import {
   SET_USER_CREDENTIALS_LOADER,
   START_FETCH_LOGOUT,
   START_FETCH_USER_CREDENTIALS,
-} from '../const/user.const';
+} from '../const';
 
 export interface IStartFetchUserCredentials {
   type: typeof START_FETCH_USER_CREDENTIALS;
